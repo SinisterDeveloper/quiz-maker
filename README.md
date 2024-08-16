@@ -4,7 +4,7 @@
     <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/SinisterDeveloper/quiz-maker?style=plastic&label=Version&logo=github">
     <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/SinisterDeveloper/quiz-maker?style=plastic&logo=codefactor">
     <img alt="GitHub Issues" src="https://img.shields.io/github/issues/SinisterDeveloper/quiz-maker?style=plastic&logo=github&label=Issues&color=blue">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/SinisterDeveloper/quiz-maker?style=plastic&logo=github&color=blue">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/SinisterDeveloper/quiz-maker?style=plastic&label=License&color=blue">
   </p>
 </div>
 
