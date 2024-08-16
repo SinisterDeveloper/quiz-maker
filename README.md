@@ -1,6 +1,5 @@
 <div align="center">
   <p>
-    <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/SinisterDeveloper/quiz-maker?style=plastic&label=Size&logo=github">
     <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/SinisterDeveloper/quiz-maker?style=plastic&label=Version&logo=github">
     <img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/SinisterDeveloper/quiz-maker?style=plastic&logo=codefactor">
     <img alt="GitHub Issues" src="https://img.shields.io/github/issues/SinisterDeveloper/quiz-maker?style=plastic&logo=github&label=Issues&color=blue">
@@ -15,12 +14,12 @@ Lightweight, AI-enhanced platform for effortless quiz creation and sharing with 
 # Setup
 
 tldr: 
-You can watch the setup tutorial [_here_](https://github.com/SinisterDeveloper/quiz-maker/tree/Stable?tab=readme-ov-file#video-tutorials)
+You can watch the setup tutorial [_here_](https://github.com/SinisterDeveloper/quiz-maker?tab=readme-ov-file#setup-and-configuration)
 
 ## Prerequisites
 
 * **[node.js](https://nodejs.org/en/)** - > Version **16.20.1 or higher**
-* **[MongoDB Cluster](https://nodejs.org/en/)** - > Free Tier or higher
+* **[MongoDB Cluster](https://www.mongodb.com/)** - > Free Tier or higher
 
 ## Clone the repository using Git or GitHub Desktop
 
