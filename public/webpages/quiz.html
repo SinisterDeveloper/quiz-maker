@@ -1,0 +1,162 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/tailwind.css" />
+		<link rel="stylesheet" href="../css/quiz.css" />
+		<script src="../js/quiz.js"></script>
+		<title>QUIZ</title>
+	</head>
+	<body>
+		<div
+			id="details"
+			class="min-h-screen flex items-center justify-center bg-gray-950"
+		>
+			<div
+				class="p-8 rounded-lg shadow-lg text-gray-900 items-center"
+				id="details-container"
+			></div>
+		</div>
+		<div
+			class="min-h-screen flex items-center justify-center bg-gray-950 question-container place-content-center"
+			style="display: none"
+			id="container"
+		>
+			<div
+				class="bg-zinc-900 text-white p-8 rounded-lg shadow-lg w-full max-w-md opacity-75"
+				id="instructions"
+				style="display: none"
+			>
+				<h1 class="text-2xl font-bold mb-4">Instructions</h1>
+				<hr class="my-4 border-gray-300" />
+				<ul class="list-none p-0 space-y-4">
+					<li>
+						<h3 class="text-lg">
+							Each question is in multiple-choice format with four
+							options. Click on an option to save your answer.
+						</h3>
+					</li>
+					<li>
+						<h3 class="text-lg">
+							To reset a saved answer, click the
+							<code class="font-mono bg-gray-700 p-1 rounded"
+								>Clear</code
+							>
+							button.
+						</h3>
+					</li>
+					<li>
+						<h3 class="text-lg">
+							Use the
+							<code class="font-mono bg-gray-700 p-1 rounded"
+								>Previous</code
+							>
+							and
+							<code class="font-mono bg-gray-700 p-1 rounded"
+								>Next</code
+							>
+							buttons at the bottom to navigate through questions.
+							The timer is also visible there.
+						</h3>
+					</li>
+					<li>
+						<h3 class="text-lg">
+							You can submit the quiz using the
+							<code class="font-mono bg-gray-700 p-1 rounded"
+								>Submit</code
+							>
+							button at the top right.
+						</h3>
+					</li>
+					<li>
+						<h3 class="text-lg">
+							The quiz ends when time runs out or you choose to
+							submit.
+						</h3>
+					</li>
+				</ul>
+				<div class="flex justify-center mt-6">
+					<button
+						id="instruction-ok"
+						class="bg-gray-700 px-4 py-2 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+					>
+						Ok
+					</button>
+				</div>
+			</div>
+			<div
+				class="bg-zinc-900 text-white p-8 rounded-lg shadow-lg w-full max-w-md opacity-75"
+				id="quiz-box"
+			>
+				<button
+					class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded absolute top-4 right-4"
+					id="submit"
+				>
+					Submit
+				</button>
+				<button
+					class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded absolute top-4 left-4"
+					id="instructions-button"
+				>
+					Instructions
+				</button>
+				<h2 class="text-center text-xl mb-4" id="quiz-name">
+					QUIZ NAME
+				</h2>
+				<hr class="border-t border-zinc-500 mb-4" />
+				<p class="text-center text-lg font-bold mb-4" id="question">
+					QUESTION TEXT
+				</p>
+				<div class="space-y-4 answer-buttons" id="options">
+					<button
+						class="bg-zinc-800 text-white p-2 rounded w-full answer-button"
+					>
+						OPTION 1
+					</button>
+					<button
+						class="bg-zinc-800 text-white p-2 rounded w-full answer-button"
+					>
+						OPTION 2
+					</button>
+					<button
+						class="bg-zinc-800 text-white p-2 rounded w-full answer-button"
+					>
+						OPTION 3
+					</button>
+					<button
+						class="bg-zinc-800 text-white p-2 rounded w-full answer-button"
+					>
+						OPTION 4
+					</button>
+				</div>
+				<hr class="border-t border-zinc-500 mt-4 mb-2" />
+				<div class="flex justify-between text-sm">
+					<span id="status">Question x of y</span>
+					<span id="timer">0m 0s</span>
+				</div>
+
+				<div class="flex justify-between mt-4">
+					<button
+						class="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600"
+						id="previous-question"
+					>
+						Previous
+					</button>
+					<button
+						class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+						style="display: none"
+						id="clear-selected"
+					>
+						Clear
+					</button>
+					<button
+						class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+						id="next-question"
+					>
+						Next
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

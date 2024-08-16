@@ -1,0 +1,4 @@
+node_modules
+.env
+.idea
+public/css/tailwind.css

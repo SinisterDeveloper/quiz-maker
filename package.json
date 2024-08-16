@@ -1,0 +1,39 @@
+{
+	"name": "quiz-maker",
+	"version": "1.0.0",
+	"description": "Lightweight, AI-enhanced platform for effortless quiz creation and sharing with lightning-fast performance",
+	"main": "index.js",
+	"scripts": {
+		"build": "npx tailwindcss -i ./public/css/admin.css -o ./public/css/tailwind.css",
+		"start": "npm run build && node .",
+		"production": "npm run build && pm2 start index.js",
+		"format": "npx prettier . --write"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SinisterDeveloper/quiz-maker.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SinisterDeveloper/quiz-maker/issues"
+	},
+	"homepage": "https://github.com/SinisterDeveloper/quiz-maker#readme",
+	"dependencies": {
+		"chalk": "^4.0.0",
+		"compression": "^1.7.4",
+		"dotenv": "^16.4.5",
+		"express": "^4.18.2",
+		"express-fileupload": "^1.5.1",
+		"mongoose": "^8.4.1",
+		"rate-limiter-flexible": "^5.0.3",
+		"short-unique-id": "^5.2.0",
+		"tailwindcss": "^3.4.9"
+	},
+	"devDependencies": {
+		"prettier": "3.3.3"
+	},
+	"lint-staged": {
+		"*.{js,css,html,md}": "npx prettier . --write"
+	}
+}
