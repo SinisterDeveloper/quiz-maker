@@ -1,0 +1,306 @@
+<!doctype html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link href="../css/tailwind.css" rel="stylesheet" />
+	<script src="../js/dashboard.js"></script>
+
+	<script>
+		function openTab(tab) {
+			let i;
+			let x = document.getElementsByClassName('webpage');
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = 'none';
+			}
+			document.getElementById(tab).style.display = tab === 'dashboard' ? 'flex' : 'block';
+
+			let items = Array.from(
+				document.getElementsByClassName('sidebar-item'),
+			);
+			items.forEach((item) => {
+				item.classList.remove('text-yellow-400');
+			});
+			const newItem = items.find((item) => item.id === `sidebar-${tab}`);
+			newItem.classList.add('text-yellow-400');
+		}
+	</script>
+	<style>
+		.chosen-Email,
+		.chosen-Answer,
+		.chosen-Shuffle {
+			border-color: #7cff7c;
+		}
+	</style>
+	<title>Dashboard</title>
+</head>
+
+<body class="bg-zinc-900">
+	<div
+		class="min-h-screen flex items-center justify-center text-white bg-gray-950"
+		id="login-page"
+	>
+		<form
+			class="place-content-center text-3xl"
+			method="dialog"
+			id="loginForm"
+		>
+			<label>
+				Password:
+				<input
+					class="text-gray-900"
+					type="password"
+					name="password"
+					required
+				/>
+			</label>
+		</form>
+	</div>
+	<div
+		class="flex h-screen text-white"
+		id="dashboard-page"
+		style="display: none"
+	>
+		<div class="w-64 bg-gray-950 p-4 flex flex-col">
+			<div class="flex items-center mb-6">
+				<span class="text-xl font-semibold"
+					>Administrator Settings</span
+				>
+			</div>
+
+			<div class="flex-grow">
+				<nav class="space-y-2 select-none">
+					<p
+						id="sidebar-dashboard"
+						onclick="openTab('dashboard')"
+						class="flex items-center p-2 text-yellow-400 hover:bg-zinc-700 rounded sidebar-item"
+					>
+						<img
+							src="../img/dashboard.png"
+							alt="Dashboard"
+							class="mr-2"
+						/>
+						Dashboard
+					</p>
+					<p
+						id="sidebar-deck-container"
+						onclick="openTab('deck-container')"
+						class="flex items-center p-2 hover:bg-zinc-700 rounded sidebar-item"
+					>
+						<img
+							src="../img/question.png"
+							alt="Questions"
+							class="mr-2"
+						/>
+						Questions
+					</p>
+					<p
+						id="sidebar-result-container"
+						onclick="openTab('result-container')"
+						class="flex items-center p-2 hover:bg-zinc-700 rounded sidebar-item"
+					>
+						<img
+							src="../img/results.png"
+							alt="Results"
+							class="mr-2"
+						/>
+						Results
+					</p>
+					<p
+						id="sidebar-help-container"
+						onclick="openTab('help-container')"
+						class="flex items-center p-2 hover:bg-zinc-700 rounded sidebar-item"
+					>
+						<img
+							src="../img/help.png"
+							alt="Support"
+							class="mr-2"
+						/>
+						Help
+					</p>
+				</nav>
+			</div>
+		</div>
+
+		<div class="flex-grow p-4 flex-1 flex">
+			<!-- QUESTION-CREATOR CONTAINER-->
+			<div
+				id="addquestion-option"
+				style="display: none"
+				class="webpage bg-zinc-900 p-6 rounded-lg shadow-lg max-w-screen flex-grow"
+			></div>
+
+			<!-- QUESTION-EDITOR CONTAINER-->
+			<div
+				id="adddisplay-option"
+				style="display: none"
+				class="webpage bg-zinc-900 p-6 rounded-lg shadow-lg max-w-screen flex-grow"
+			></div>
+
+			<!-- QUESTION CONTAINERS PAGE -->
+			<div
+				class="webpage rounded-lg shadow-lg max-w-screen flex-grow"
+				id="viewquestions-option"
+				style="display: none"
+			>
+				<div class="flex justify-between items-center mb-4">
+					<h1 class="text-xl font-bold">Deck Viewer</h1>
+					<div class="flex items-center space-x-2">
+						<button id="prev-q" class="bg-green-500 p-2 rounded">
+							◄
+						</button>
+						<span id="q-page-count">Page 1 of x</span>
+						<button id="next-q" class="bg-green-500 p-2 rounded">
+							►
+						</button>
+					</div>
+					<button
+						class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+						onclick="openTab('deck-container')"
+					>
+						Close
+					</button>
+				</div>
+				<hr />
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-4"
+					id="questions"
+				></div>
+			</div>
+
+			<!--	HELP CONTAINER		H-->
+			<div
+				class="webpage rounded-lg shadow-lg max-w-screen inset-0"
+				id="help-container"
+				style="display: none"
+			>
+				<p class="mb-2">Instructions on how to create and share a quiz can be found <a class="text-blue-500" target="_blank" href="https://github.com/SinisterDeveloper/quiz-maker/wiki#Documentation">here</a></p>
+
+				<h1 class="text-2xl font-bold my-4">Beta Features</h1>
+
+				<h2 class="text-xl font-bold my-4">AI Autofill</h2>
+
+				<p>The AI Model <code class="font-mono bg-gray-700 p-1 rounded">@cf/google/gemma-2b-it-lora</code>, operated and owned by Cloudfare/Google & used in <code class="font-mono bg-gray-700 p-1 rounded">quiz-maker</code>, is also in Beta and we cannot guarantee a server-side error-free environment and hence the common issues and solutions have been mentioned below</p>
+
+				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">401 - Unauthorized</code> - The credentials entered in the <code class="font-mono bg-gray-700 p-1 rounded">.env</code> file is either missing or invalid</h4>
+
+				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">500 - Server Side Error</code> - Possible a formatting mistake by the AI model. Rerunning the Autofill button should solve the problem. Check Console/Terminal for more information</h4>
+
+				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">400 - Bad Request</code> - You may have been rate-limited by Cloudfare for too many requests or for exceeding your quota</h4>
+
+				<h2 class="text-xl font-bold my-4">Quiz Background Image</h2>
+
+				<p class="my-4">The server directly saves the uploaded image <em>without modification (resizing, compression, etc.)</em> to its storage and serves the image file as is to the quiz page. It is likely that the image could be too big or too small depending on the quiz player's screen</p>
+
+				<p>Modifying an image file to perfectly suit an end-user's needs is complicated and third-party services for the same are not free. However, I will do the best of my ability to fix this in the next release</p>
+
+				<h4 class="text-base">Possible Solution - Prefer abstract images or images whose position of display won't matter</h4>
+
+				<h1 class="text-2xl font-bold my-4">Contact</h1>
+
+				<p>If the above solutions did not work, or if you have any questions/issues, you may email me (<code class="font-mono bg-gray-700 p-1 rounded">thesinisterdev@gmail.com</code>). If you are sure that there is a bug in the website: <em><a class="text-blue-500" target="_blank" href="https://github.com/SinisterDeveloper/quiz-maker/issues">raise an issue</a></em> in the code repository with details regarding the issue</p>
+			</div>
+
+			<!-- DECK-CREATOR CONTAINER-->
+			<div
+				id="adddeck-option"
+				style="display: none"
+				class="webpage bg-zinc-900 p-6 rounded-lg shadow-lg max-w-screen flex-grow"
+			></div>
+
+			<!-- DECK CONTAINERS PAGE -->
+			<div
+				class="webpage rounded-lg shadow-lg max-w-screen flex-grow"
+				id="deck-container"
+				style="display: none"
+			>
+				<div
+					id="DecksContainerTitle"
+					class="flex justify-between items-center mb-4"
+				>
+					<h1 class="text-xl font-bold">Question Decks</h1>
+					<div class="flex items-center space-x-2">
+						<button id="prev-d" class="bg-green-500 p-2 rounded">
+							◄
+						</button>
+						<span id="d-page-count">Page 1 of x</span>
+						<button id="next-d" class="bg-green-500 p-2 rounded">
+							►
+						</button>
+					</div>
+					<button
+						class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+						id="new-deck"
+					>
+						New Deck
+					</button>
+				</div>
+
+				<hr />
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-4"
+					id="decks"
+				></div>
+			</div>
+
+			<!-- RESULTS CONTAINERS PAGE -->
+			<div
+				class="webpage rounded-lg shadow-lg max-w-screen flex-grow"
+				id="result-container"
+				style="display: none"
+			>
+				<div
+					id="ResultsContainerTitle"
+					class="flex justify-between items-center mb-4"
+				>
+					<h1 class="text-xl font-bold">Results</h1>
+					<div class="flex items-center space-x-2">
+						<button id="prev-r" class="bg-green-500 p-2 rounded">
+							◄
+						</button>
+						<span id="r-page-count">Page 1 of x</span>
+						<button id="next-r" class="bg-green-500 p-2 rounded">
+							►
+						</button>
+					</div>
+					<button
+						class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+						id="result-refresh"
+					>
+						Refresh
+					</button>
+				</div>
+
+				<hr />
+				<div
+					class="grid grid-cols-1 md:grid-cols-3 gap-4"
+					id="results"
+				></div>
+			</div>
+
+			<!-- HOME PAGE -->
+			<div
+				class="webpage flex flex-col rounded-lg shadow-lg max-w-screen flex-grow items-center justify-center select-none"
+				id="dashboard"
+			>
+				<div class="absolute top-4 right-4 space-x-2">
+					<a href="https://www.buymeacoffee.com/sinisterdeveloper" target="_blank" class="bg-zinc-700 text-yellow-400 hover:text-yellow-500 py-2 px-4 rounded-md text-sm">Donate</a>
+					<a href="https://github.com/SinisterDeveloper/quiz-maker/tree/Stable?tab=readme-ov-file#setup-and-configuration" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">Watch Demo</a>
+					<a href="https://github.com/SinisterDeveloper/quiz-maker/wiki" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">Guide</a>
+					<a href="https://github.com/SinisterDeveloper/quiz-maker/tree/Stable" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">View Repository</a>
+				</div>
+				<h1 class="text-center text-7xl font-bold my-8">Quiz-Maker</h1>
+				<p class="text-center text-lg mb-8">Lightweight, AI-enhanced platform for effortless quiz creation and sharing with lightning-fast performance</p>
+				<div class="flex space-x-2">
+					<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/SinisterDeveloper/quiz-maker?style=plastic&label=Size&logo=github">
+					<img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/SinisterDeveloper/quiz-maker?style=plastic&label=Version&logo=github">
+					<img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/SinisterDeveloper/quiz-maker?style=plastic&logo=codefactor">
+					<img alt="GitHub Issues" src="https://img.shields.io/github/issues/SinisterDeveloper/quiz-maker?style=plastic&logo=github&label=Issues&color=blue">
+					<img alt="GitHub License" src="https://img.shields.io/github/license/SinisterDeveloper/quiz-maker?style=plastic&logo=github&color=blue">
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>

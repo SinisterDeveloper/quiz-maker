@@ -1,0 +1,57 @@
+@font-face {
+	font-family: jetbrainsmono;
+	src: url('../fonts/JetBrainsMono-MediumItalic.ttf');
+}
+.answer-button {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding: 10px 30px;
+	margin: 5px 0;
+	border: 1px solid black;
+	font-size: 15px;
+	background-color: black;
+	color: #faf9f6;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	z-index: 1;
+	overflow: hidden;
+	transition:
+		color 0.25s,
+		box-shadow 0.25s;
+	transition-delay: 0s, 0s;
+}
+
+.answer-button:hover {
+	transition-delay: 0s, 0.25s;
+	background-color: black;
+	color: black;
+	font-weight: bolder;
+	box-shadow:
+		0 0 10px #faf9f6,
+		0 0 20px #faf9f6;
+	letter-spacing: 0.25em;
+	transform: scale(1.05);
+}
+
+.answer-button::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -150px;
+	width: 0;
+	height: 100%;
+	background: #faf9f6;
+	transform: skewX(35deg);
+	z-index: -1;
+	transition: 0.5s;
+}
+
+.answer-button:hover:before {
+	width: 130%;
+}
+
+.chosen-answer {
+	border-color: #7cff7c;
+}
