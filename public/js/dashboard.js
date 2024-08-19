@@ -995,7 +995,7 @@ window.onload = async () => {
 			form.reset();
 			// reset() does not reset values of elements whose attributes have been changed manually (in this case, during the autofill process)
 			if (page.toLowerCase() === 'question')
-				for (let i = 0; i < aiFields.length; i++)
+				for (let i = 0; i < aiFields?.length; i++)
 					aiFields[i].textContent = '';
 
 			CreatorContainer.appendChild(statusContainer);
