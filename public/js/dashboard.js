@@ -210,10 +210,12 @@ window.onload = async () => {
 								);
 							try {
 								await navigator.share({
-									url: `${window.location.protocol}//${window.location.host}/quiz?deck=${deck.id}`
+									url: `${window.location.protocol}//${window.location.host}/quiz?deck=${deck.id}`,
 								});
 							} catch (error) {
-								alert('Your browser demands the resource must be either a localhost or be served over https:// to share. Proceeding to open the link so you can copy it manually')
+								alert(
+									'Your browser demands the resource must be either a localhost or be served over https:// to share. Proceeding to open the link so you can copy it manually',
+								);
 								window.open(`/quiz?deck=${deck.id}`);
 							}
 							break;
@@ -764,7 +766,7 @@ window.onload = async () => {
 						if (document.getElementById('autofill')) return;
 
 						const autofillButton = document.createElement('button');
-						autofillButton.textContent = 'Autofill Choices (Beta)';
+						autofillButton.textContent = 'Autofill Choices';
 						autofillButton.classList.add(
 							'mt-4',
 							'p-2',
@@ -957,11 +959,12 @@ window.onload = async () => {
 						headers: { Authorization: `Bearer ${adminToken}` },
 					},
 				);
-				const uploadButton = document.getElementById(`uploadBackground`)
+				const uploadButton =
+					document.getElementById(`uploadBackground`);
 				uploadButton.textContent = `Upload`;
 				uploadButton.classList.replace(
 					'text-green-500',
-					'text-zinc-100'
+					'text-zinc-100',
 				);
 			}
 

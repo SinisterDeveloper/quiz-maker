@@ -74,11 +74,11 @@ module.exports = {
 					'Enter an integer value for the "Time Limit" field!',
 			});
 
-		if (data.name.length > 25) return res.json({
-			success: false,
-			errorMessage:
-				'Deck name must contain less than 20 characters',
-		});
+		if (data.name.length > 25)
+			return res.json({
+				success: false,
+				errorMessage: 'Deck name must contain less than 20 characters',
+			});
 
 		const deck = new Deck({
 			id: id,

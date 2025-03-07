@@ -155,9 +155,8 @@ class Deck {
 	initialise(shuffle = false) {
 		let questions = [];
 
-		this.questions.forEach((q, i) => {
+		for (const q of this.questions)
 			questions.push(q);
-		});
 
 		questions.sort((a, b) => a.timestamp - b.timestamp);
 		if (shuffle) {

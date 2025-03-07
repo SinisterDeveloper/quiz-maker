@@ -13,8 +13,8 @@ window.onload = async () => {
 		console.error('The developer console is forbidden during the quiz!');
 		window.console.log = function () {
 			return false;
-		}
-	}
+		};
+	};
 
 	async function end() {
 		const endQuizRequest = await fetch(
@@ -23,7 +23,7 @@ window.onload = async () => {
 				method: 'DELETE',
 				body: JSON.stringify({
 					timeEnded: Date.now(),
-					deckId: deck
+					deckId: deck,
 				}),
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',

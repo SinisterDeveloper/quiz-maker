@@ -1,6 +1,6 @@
 const ShortUniqueId = require('short-unique-id');
 const uid = new ShortUniqueId({ length: 5 });
-const { updatePlayer, err } = require('../../modules/Util');
+const { updatePlayer } = require('../../modules/Util');
 
 module.exports = {
 	name: 'update',
@@ -40,27 +40,31 @@ module.exports = {
 			timer: deckData.timer,
 		});
 
-		setTimeout(async () => {
-			if (App.players.has(token)) {
-				await fetch(
-					`${req.protocol}://${req.hostname}:${process.env.PORT}/quiz/update`,
-					{
-						method: 'DELETE',
-						body: JSON.stringify({
-							timeEnded: Date.now(),
-							deckId: deck
-						}),
-						headers: {
-							'Content-type': 'application/json; charset=UTF-8',
-							Authorization: 'Bearer ' + token,
+		setTimeout(
+			async () => {
+				if (App.players.has(token)) {
+					await fetch(
+						`${req.protocol}://${req.hostname}:${process.env.PORT}/quiz/update`,
+						{
+							method: 'DELETE',
+							body: JSON.stringify({
+								timeEnded: Date.now(),
+								deckId: deck,
+							}),
+							headers: {
+								'Content-type':
+									'application/json; charset=UTF-8',
+								Authorization: 'Bearer ' + token,
+							},
 						},
-					},
-				);
-				await fetch(
-					`${req.protocol}://${req.hostname}:${process.env.PORT}/quiz/result?player=${token}`,
-				)
-			}
-		}, (deckData.timer + 1) * 1000 * 60);
+					);
+					await fetch(
+						`${req.protocol}://${req.hostname}:${process.env.PORT}/quiz/result?player=${token}`,
+					);
+				}
+			},
+			(deckData.timer + 1) * 1000 * 60,
+		);
 	},
 
 	/**
@@ -90,7 +94,7 @@ module.exports = {
 
 		updatePlayer(App, token, [
 			{ name: 'timeEnded', value: timeEnded },
-			{ name: 'score', value: score }
+			{ name: 'score', value: score },
 		]);
 		res.sendStatus(200);
 	},

@@ -1,4 +1,4 @@
-const { Question, Deck } = require('../../modules/Structure');
+const { Question } = require('../../modules/Structure');
 const ShortUniqueId = require('short-unique-id');
 const uid = new ShortUniqueId({ length: 5 });
 

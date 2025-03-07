@@ -14,7 +14,8 @@
 			for (i = 0; i < x.length; i++) {
 				x[i].style.display = 'none';
 			}
-			document.getElementById(tab).style.display = tab === 'dashboard' ? 'flex' : 'block';
+			document.getElementById(tab).style.display =
+				tab === 'dashboard' ? 'flex' : 'block';
 
 			let items = Array.from(
 				document.getElementsByClassName('sidebar-item'),
@@ -112,11 +113,7 @@
 						onclick="openTab('help-container')"
 						class="flex items-center p-2 hover:bg-zinc-700 rounded sidebar-item"
 					>
-						<img
-							src="../img/help.png"
-							alt="Support"
-							class="mr-2"
-						/>
+						<img src="../img/help.png" alt="Support" class="mr-2" />
 						Help
 					</p>
 				</nav>
@@ -175,31 +172,58 @@
 				id="help-container"
 				style="display: none"
 			>
-				<p class="mb-2">Instructions on how to create and share a quiz can be found <a class="text-blue-500" target="_blank" href="https://github.com/SinisterDeveloper/quiz-maker/wiki#Documentation">here</a></p>
+				<p class="mb-2">
+					Instructions on how to create and share a quiz can be found
+					<a
+						class="text-blue-500"
+						target="_blank"
+						href="https://github.com/SinisterDeveloper/quiz-maker/wiki#Documentation"
+						>here</a
+					>
+				</p>
 
 				<h1 class="text-2xl font-bold my-4">Beta Features</h1>
 
-				<h2 class="text-xl font-bold my-4">AI Autofill</h2>
-
-				<p>The AI Model <code class="font-mono bg-gray-700 p-1 rounded">@cf/google/gemma-2b-it-lora</code>, operated and owned by Cloudfare/Google & used in <code class="font-mono bg-gray-700 p-1 rounded">quiz-maker</code>, is also in Beta and we cannot guarantee a server-side error-free environment and hence the common issues and solutions have been mentioned below</p>
-
-				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">401 - Unauthorized</code> - The credentials entered in the <code class="font-mono bg-gray-700 p-1 rounded">.env</code> file is either missing or invalid</h4>
-
-				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">500 - Server Side Error</code> - Possible a formatting mistake by the AI model. Rerunning the Autofill button should solve the problem. Check Console/Terminal for more information</h4>
-
-				<h4 class="text-base my-3">- <code class="font-mono bg-gray-700 p-1 rounded">400 - Bad Request</code> - You may have been rate-limited by Cloudfare for too many requests or for exceeding your quota</h4>
-
 				<h2 class="text-xl font-bold my-4">Quiz Background Image</h2>
 
-				<p class="my-4">The server directly saves the uploaded image <em>without modification (resizing, compression, etc.)</em> to its storage and serves the image file as is to the quiz page. It is likely that the image could be too big or too small depending on the quiz player's screen</p>
+				<p class="my-4">
+					The server directly saves the uploaded image
+					<em>without modification (resizing, compression, etc.)</em>
+					to its storage and serves the image file as is to the quiz
+					page. It is likely that the image could be too big or too
+					small depending on the quiz player's screen
+				</p>
 
-				<p>Modifying an image file to perfectly suit an end-user's needs is complicated and third-party services for the same are not free. However, I will do the best of my ability to fix this in the next release</p>
+				<p>
+					Modifying an image file to perfectly suit an end-user's
+					needs is complicated and third-party services for the same
+					are not free. However, I will do the best of my ability to
+					fix this in the next release
+				</p>
 
-				<h4 class="text-base">Possible Solution - Prefer abstract images or images whose position of display won't matter</h4>
+				<h4 class="text-base">
+					Possible Solution - Prefer abstract images or images whose
+					position of display won't matter
+				</h4>
 
 				<h1 class="text-2xl font-bold my-4">Contact</h1>
 
-				<p>If the above solutions did not work, or if you have any questions/issues, you may email me (<code class="font-mono bg-gray-700 p-1 rounded">thesinisterdev@gmail.com</code>). If you are sure that there is a bug in the website: <em><a class="text-blue-500" target="_blank" href="https://github.com/SinisterDeveloper/quiz-maker/issues">raise an issue</a></em> in the code repository with details regarding the issue</p>
+				<p>
+					If the above solutions did not work, or if you have any
+					questions/issues, you may email me (<code
+						class="font-mono bg-gray-700 p-1 rounded"
+						>thesinisterdev@gmail.com</code
+					>). If you are sure that there is a bug in the website:
+					<em
+						><a
+							class="text-blue-500"
+							target="_blank"
+							href="https://github.com/SinisterDeveloper/quiz-maker/issues"
+							>raise an issue</a
+						></em
+					>
+					in the code repository with details regarding the issue
+				</p>
 			</div>
 
 			<!-- DECK-CREATOR CONTAINER-->
@@ -285,20 +309,49 @@
 				id="dashboard"
 			>
 				<div class="absolute top-4 right-4 space-x-2">
-					<a href="https://github.com/SinisterDeveloper/quiz-maker?tab=readme-ov-file#setup-and-configuration" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">Watch Demo</a>
-					<a href="https://github.com/SinisterDeveloper/quiz-maker/wiki" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">Guide</a>
-					<a href="https://github.com/SinisterDeveloper/quiz-maker" target="_blank" class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm">View Repository</a>
+					<a
+						href="https://github.com/SinisterDeveloper/quiz-maker?tab=readme-ov-file#setup-and-configuration"
+						target="_blank"
+						class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm"
+						>Watch Demo</a
+					>
+					<a
+						href="https://github.com/SinisterDeveloper/quiz-maker/wiki"
+						target="_blank"
+						class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm"
+						>Guide</a
+					>
+					<a
+						href="https://github.com/SinisterDeveloper/quiz-maker"
+						target="_blank"
+						class="bg-zinc-700 text-white py-2 px-4 rounded-md text-sm"
+						>View Repository</a
+					>
 				</div>
 				<h1 class="text-center text-7xl font-bold my-8">Quiz-Maker</h1>
-				<p class="text-center text-lg mb-8">Lightweight, AI-enhanced platform for effortless quiz creation and sharing with lightning-fast performance</p>
+				<p class="text-center text-lg mb-8">
+					Lightweight, AI-enhanced platform for effortless quiz
+					creation and sharing with lightning-fast performance
+				</p>
 				<div class="flex space-x-2">
-					<img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/SinisterDeveloper/quiz-maker?style=plastic&label=Version&logo=github">
-					<img alt="CodeFactor Grade" src="https://img.shields.io/codefactor/grade/github/SinisterDeveloper/quiz-maker?style=plastic&logo=codefactor">
-					<img alt="GitHub Issues" src="https://img.shields.io/github/issues/SinisterDeveloper/quiz-maker?style=plastic&logo=github&label=Issues&color=blue">
-					<img alt="GitHub License" src="https://img.shields.io/github/license/SinisterDeveloper/quiz-maker?style=plastic&logo=github&color=blue">
+					<img
+						alt="GitHub package.json version"
+						src="https://img.shields.io/github/package-json/v/SinisterDeveloper/quiz-maker?style=plastic&label=Version&logo=github"
+					/>
+					<img
+						alt="CodeFactor Grade"
+						src="https://img.shields.io/codefactor/grade/github/SinisterDeveloper/quiz-maker?style=plastic&logo=codefactor"
+					/>
+					<img
+						alt="GitHub Issues"
+						src="https://img.shields.io/github/issues/SinisterDeveloper/quiz-maker?style=plastic&logo=github&label=Issues&color=blue"
+					/>
+					<img
+						alt="GitHub License"
+						src="https://img.shields.io/github/license/SinisterDeveloper/quiz-maker?style=plastic&logo=github&color=blue"
+					/>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </body>

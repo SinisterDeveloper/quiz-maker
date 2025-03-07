@@ -13,7 +13,6 @@ const DeckSchema = require('./modules/DeckSchema');
 const ShortUniqueId = require('short-unique-id');
 const uid = new ShortUniqueId({ length: 10 });
 const {
-	authenticateEndpoint,
 	authenticateAdmin,
 	rateLimiterMiddleware,
 } = require('./modules/Util');
@@ -56,7 +55,7 @@ async function connect() {
 
 	await handleRoutes();
 
-	App.listen(process.env.PORT, () => {
+	App.listen(process.env.PORT, '0.0.0.0', () => {
 		misc(
 			`Admin Dashboard running on http://localhost:${process.env.PORT}/dashboard`,
 		);
@@ -90,20 +89,20 @@ const fetchDecks = async () => {
 
 for (const page of pages)
 	App.get(`/${page}`, (req, res) => {
-			const userAgent = req.headers['user-agent'];
+		const userAgent = req.headers['user-agent'];
 
-			const isMobile = /Mobi|iPad|Tablet|Android/i.test(userAgent);
-			if (isMobile && page === ('dashboard' || '')) return res.send('Dashboard can only be accessed via Laptop/PC');
-			res.sendFile(
-				path.join(
-					__dirname,
-					'public',
-					'webpages',
-					`${page || 'dashboard'}.html`,
-				),
-			);
-	}
-	);
+		const isMobile = /Mobi|iPad|Tablet|Android/i.test(userAgent);
+		if (isMobile && page === ('dashboard' || ''))
+			return res.send('Dashboard can only be accessed via Laptop/PC');
+		res.sendFile(
+			path.join(
+				__dirname,
+				'public',
+				'webpages',
+				`${page || 'dashboard'}.html`,
+			),
+		);
+	});
 
 // ------------- ROUTES-HANDLER---------------------------------------------------------------
 
@@ -201,7 +200,6 @@ async function handleRoutes() {
 
 connect().catch((e) => err(e));
 
-process.on('unhandledRejection', error => {
+process.on('unhandledRejection', (error) => {
 	console.error('Unhandled promise rejection: ', error);
 });
-

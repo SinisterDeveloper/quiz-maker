@@ -27,7 +27,7 @@ module.exports = {
 				'img',
 				`BG_${deck.id}.jpeg`,
 			),
-			(err, data) => {
+			(err) => {
 				image = err ? 'default' : 'custom';
 				res.json({
 					name: deck.name,
