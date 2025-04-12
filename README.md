@@ -13,9 +13,6 @@ Lightweight, AI-enhanced platform for effortless quiz creation and sharing with 
 
 # Setup
 
-tldr:
-You can watch the setup tutorial [_here_](https://github.com/SinisterDeveloper/quiz-maker?tab=readme-ov-file#setup-and-configuration)
-
 ## Prerequisites
 
 -   **[node.js](https://nodejs.org/en/)** - > Version **16.20.1 or higher**
