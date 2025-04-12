@@ -48,8 +48,6 @@ module.exports = {
 	 * @returns {Promise<void>}
 	 */
 	async post(App, req, res) {
-		if (!process.env.CLOUDFARE_API_KEY || !process.env.CLOUDFARE_USER_ID)
-			return res.sendStatus(401);
 
 		const chatSession = model.startChat({
 			generationConfig,

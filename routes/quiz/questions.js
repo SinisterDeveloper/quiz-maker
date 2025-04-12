@@ -27,7 +27,8 @@ module.exports = {
 			const questionsData = deck.questions;
 			let questions = [];
 
-			for (const questionData of questionsData) {
+			for (let questionData of questionsData) {
+				questionData = questionData[1];
 				questions.push({
 					question: questionData.question,
 					id: questionData.id,

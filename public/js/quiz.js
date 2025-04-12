@@ -9,12 +9,12 @@ window.onload = async () => {
 		false,
 	);
 
-	window.console.log = function () {
-		console.error('The developer console is forbidden during the quiz!');
-		window.console.log = function () {
-			return false;
-		};
-	};
+	// window.console.log = function () {
+	// 	console.error('The developer console is forbidden during the quiz!');
+	// 	window.console.log = function () {
+	// 		return false;
+	// 	};
+	// };
 
 	async function end() {
 		const endQuizRequest = await fetch(
@@ -238,6 +238,8 @@ window.onload = async () => {
 			nextButton.disabled = qNumber === questions.length;
 
 			const currentQuestion = questions[number - 1];
+			console.log(number);
+			console.log(questions);
 
 			questionElement.textContent = currentQuestion.question;
 			let chosen = document.getElementsByClassName('chosen-answer')[0];

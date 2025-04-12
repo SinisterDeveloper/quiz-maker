@@ -52,7 +52,8 @@ module.exports = {
 		let questions = deck.initialise();
 		response.stats.conclusion = deck.conclusion || '';
 
-		for (const question of questions) {
+		for (let question of questions) {
+			question = question['1']
 			if (!userAnswers.has(question.id))
 				answers.push({
 					question: question.question,
