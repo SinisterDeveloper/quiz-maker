@@ -1197,9 +1197,13 @@ Back
 
 function App() {
 useEffect(() => {
-document.addEventListener('contextmenu', (event) => {
+const blockMenu = (event) => {
 event.preventDefault()
-})
+}
+document.addEventListener('contextmenu', blockMenu)
+return () => {
+document.removeEventListener('contextmenu', blockMenu)
+}
 }, [])
 
 const path = window.location.pathname.toLowerCase()
