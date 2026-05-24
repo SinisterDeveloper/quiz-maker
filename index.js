@@ -37,6 +37,12 @@ App.admin = uid.rnd();
 process.env.ADMIN = App.admin;
 
 const pages = ['', 'home', 'quiz', 'result', 'dashboard'];
+const frontendEntry = path.join(
+	__dirname,
+	'public',
+	'webpages',
+	'index.html',
+);
 
 // -----------------CONNECTION-----------------------------------------------------
 
@@ -92,16 +98,9 @@ for (const page of pages)
 		const userAgent = req.headers['user-agent'];
 
 		const isMobile = /Mobi|iPad|Tablet|Android/i.test(userAgent);
-		if (isMobile && page === ('dashboard' || ''))
+		if (isMobile && (page === 'dashboard' || page === ''))
 			return res.send('Dashboard can only be accessed via Laptop/PC');
-		res.sendFile(
-			path.join(
-				__dirname,
-				'public',
-				'webpages',
-				`${page || 'dashboard'}.html`,
-			),
-		);
+		res.sendFile(frontendEntry);
 	});
 
 // ------------- ROUTES-HANDLER---------------------------------------------------------------
