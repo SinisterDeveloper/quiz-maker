@@ -4,10 +4,13 @@
 	"description": "Lightweight, AI-enhanced platform for effortless quiz creation and sharing with lightning-fast performance",
 	"main": "index.js",
 	"scripts": {
-		"build": "npx tailwindcss -i ./public/css/admin.css -o ./public/css/tailwind.css",
+		"build:css": "npx tailwindcss -i ./public/css/admin.css -o ./public/css/tailwind.css",
+		"build:frontend": "npm --prefix ./frontend run build",
+		"build": "npm run build:css && npm run build:frontend",
 		"start": "npm run build && node .",
 		"production": "npm run build && pm2 start index.js",
-		"format": "npx prettier . --write"
+		"format": "npx prettier . --write",
+		"postinstall": "npm --prefix ./frontend install"
 	},
 	"repository": {
 		"type": "git",
