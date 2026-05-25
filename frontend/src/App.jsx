@@ -59,26 +59,51 @@ function DashboardPage() {
 		[viewDeckQuestions],
 	);
 
+	useEffect(() => {
+		if (deckPage >= deckPages.length && deckPages.length > 0) {
+			setDeckPage(Math.max(0, deckPages.length - 1));
+		}
+	}, [deckPages, deckPage]);
+
+	useEffect(() => {
+		if (resultPage >= resultPages.length && resultPages.length > 0) {
+			setResultPage(Math.max(0, resultPages.length - 1));
+		}
+	}, [resultPages, resultPage]);
+
+	useEffect(() => {
+		if (
+			viewQuestionPage >= questionPages.length &&
+			questionPages.length > 0
+		) {
+			setViewQuestionPage(Math.max(0, questionPages.length - 1));
+		}
+	}, [questionPages, viewQuestionPage]);
+
 	const fetchDecks = async (token = adminToken) => {
-		if (!token) return;
+		if (!token) return [];
 		const response = await request('/admin/deck', {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		if (!response.ok) return;
+		if (!response.ok) return [];
 		const data = await response.json();
-		setDecks(Array.isArray(data) ? data : []);
+		const deckList = Array.isArray(data) ? data : [];
+		setDecks(deckList);
 		setDeckPage(0);
+		return deckList;
 	};
 
 	const fetchResults = async (token = adminToken) => {
-		if (!token) return;
+		if (!token) return [];
 		const response = await request('/admin/result', {
 			headers: { Authorization: `Bearer ${token}` },
 		});
-		if (!response.ok) return;
+		if (!response.ok) return [];
 		const data = await response.json();
-		setResults(Array.isArray(data) ? data : []);
+		const resultList = Array.isArray(data) ? data : [];
+		setResults(resultList);
 		setResultPage(0);
+		return resultList;
 	};
 
 	const handleLogin = async (event) => {
@@ -180,7 +205,16 @@ function DashboardPage() {
 			},
 		});
 		setDisplayQuestionData(null);
-		await fetchDecks();
+		const updatedDecks = await fetchDecks();
+		const updatedDeck = updatedDecks.find((d) => d.id === deckId);
+		if (updatedDeck) {
+			const questions = getQuestionList(updatedDeck);
+			if (questions.length > 0) {
+				setViewDeckQuestions(questions);
+				setActiveTab('viewquestions-option');
+				return;
+			}
+		}
 		setActiveTab('deck-container');
 	};
 
@@ -1300,34 +1334,50 @@ function QuizPage() {
 		event.preventDefault();
 		if (!deckId) return;
 
-		const updateResponse = await request('/quiz/update', {
-			method: 'POST',
-			body: JSON.stringify({ deck: deckId }),
-			headers: { 'Content-type': 'application/json; charset=UTF-8' },
-		});
-		const updateData = await updateResponse.json();
-		setPlayerToken(updateData.token);
-		setPlayerInfo(updateData);
+		try {
+			const updateResponse = await request('/quiz/update', {
+				method: 'POST',
+				body: JSON.stringify({ deck: deckId }),
+				headers: { 'Content-type': 'application/json; charset=UTF-8' },
+			});
+			if (!updateResponse.ok) {
+				const errorText = await updateResponse.text();
+				throw new Error(errorText || 'Failed to initialize quiz');
+			}
+			const updateData = await updateResponse.json();
+			if (!updateData.token) throw new Error('Invalid server response');
 
-		await request('/quiz/metadata', {
-			method: 'POST',
-			body: JSON.stringify({
-				name: trimUpper(playerName),
-				email: metadata?.email ? trimUpper(playerEmail) : '',
-			}),
-			headers: {
-				'Content-type': 'application/json; charset=UTF-8',
-				Authorization: `Bearer ${updateData.token}`,
-			},
-		});
+			setPlayerToken(updateData.token);
+			setPlayerInfo(updateData);
 
-		const questionResponse = await request('/quiz/questions', {
-			headers: { Authorization: `Bearer ${updateData.token}` },
-		});
-		const questionData = await questionResponse.json();
-		setQuestions(Array.isArray(questionData) ? questionData : []);
-		setQuestionIndex(0);
-		setSubmittedDetails(true);
+			const metadataResponse = await request('/quiz/metadata', {
+				method: 'POST',
+				body: JSON.stringify({
+					name: trimUpper(playerName),
+					email: metadata?.email ? trimUpper(playerEmail) : '',
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+					Authorization: `Bearer ${updateData.token}`,
+				},
+			});
+			if (!metadataResponse.ok) {
+				throw new Error('Failed to submit player metadata');
+			}
+
+			const questionResponse = await request('/quiz/questions', {
+				headers: { Authorization: `Bearer ${updateData.token}` },
+			});
+			if (!questionResponse.ok) {
+				throw new Error('Failed to fetch questions');
+			}
+			const questionData = await questionResponse.json();
+			setQuestions(Array.isArray(questionData) ? questionData : []);
+			setQuestionIndex(0);
+			setSubmittedDetails(true);
+		} catch (error) {
+			window.alert(`Error: ${error.message}`);
+		}
 	};
 
 	const currentQuestion = questions[questionIndex];
@@ -1359,7 +1409,10 @@ function QuizPage() {
 			<div
 				id="details"
 				className={`min-h-screen flex items-center justify-center ${metadata?.background === 'custom' ? '' : 'bg-gray-950'}`}
-				style={backgroundStyle}
+				style={{
+					...backgroundStyle,
+					display: submittedDetails ? 'none' : 'flex',
+				}}
 			>
 				<div
 					className="p-8 rounded-lg shadow-lg text-gray-900 items-center"
@@ -1367,7 +1420,7 @@ function QuizPage() {
 				>
 					{submittedDetails ?
 						<p className="text-green-400 text-base mt-2">
-							Logged in as {trimUpper(playerName)}! Redirecting...
+							Logged in as {trimUpper(playerName)}! Loading Quiz...
 						</p>
 					:	<form id="details-input" onSubmit={submitDetails}>
 							<input
