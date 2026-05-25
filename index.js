@@ -12,10 +12,7 @@ const { err, success, misc, blue, caution } = require('./modules/Util');
 const DeckSchema = require('./modules/DeckSchema');
 const ShortUniqueId = require('short-unique-id');
 const uid = new ShortUniqueId({ length: 10 });
-const {
-	authenticateAdmin,
-	rateLimiterMiddleware,
-} = require('./modules/Util');
+const { authenticateAdmin, rateLimiterMiddleware } = require('./modules/Util');
 
 const adminRoutes = fs
 	.readdirSync('./routes/admin')
@@ -37,12 +34,7 @@ App.admin = uid.rnd();
 process.env.ADMIN = App.admin;
 
 const pages = ['', 'home', 'quiz', 'result', 'dashboard'];
-const frontendEntry = path.join(
-	__dirname,
-	'public',
-	'webpages',
-	'index.html',
-);
+const frontendEntry = path.join(__dirname, 'public', 'webpages', 'index.html');
 
 // -----------------CONNECTION-----------------------------------------------------
 

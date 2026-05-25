@@ -48,7 +48,6 @@ module.exports = {
 	 * @returns {Promise<void>}
 	 */
 	async post(App, req, res) {
-
 		const chatSession = model.startChat({
 			generationConfig,
 			history: [],
@@ -61,7 +60,8 @@ module.exports = {
 		const content = JSON.parse(response.text());
 		console.log(content);
 		let choices = [];
-		for (const field in content) choices.push(content[field].replaceAll('"', ''));
+		for (const field in content)
+			choices.push(content[field].replaceAll('"', ''));
 
 		// Randomise the order of choices
 		for (let i = 0; i < choices.length; i++) {
